@@ -9,7 +9,7 @@
 
 <body style="background: white;">
     <div>
-        Хост TCP сервера: <input value="0.0.0.0" id="host">
+        Хост TCP сервера: <input value="127.0.0.1" id="host">
     </div>
     <div>
         Порт TCP сервера: <input value="6969" id="port">
@@ -25,7 +25,8 @@
     </div>
     <br>
     <div>
-        Ответ TCP сервера (первые n символов): <span id="resp"></span>
+        Ответ TCP сервера (первые n символов):
+        <pre id="resp"></pre>
     </div>
 
     <script src="index.js"></script>

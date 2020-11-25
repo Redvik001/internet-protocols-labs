@@ -10,7 +10,7 @@ const net = require('net');
 const client = new net.Socket();
 
 connectBtn.addEventListener("click", () => {
-    if (client.connecting) {
+    if (client.readyState === "open") {
         client.destroy();
         statusElem.innerText = "OFF";
         connectBtn.innerText = "Подключиться"
@@ -23,7 +23,7 @@ connectBtn.addEventListener("click", () => {
 });
 
 getSimbolsBtn.addEventListener("click", () => {
-    if (!client.connecting) return alert("В начале, подключитесь к серверу.");
+    if (client.readyState !== "open") return alert("В начале, подключитесь к серверу.");
     client.write(simbolsQuantityInput.value);
 });
 
