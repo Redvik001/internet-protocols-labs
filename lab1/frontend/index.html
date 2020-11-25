@@ -8,24 +8,27 @@
 </head>
 
 <body style="background: white;">
-    <script>
-        var net = require('net');
+    <div>
+        Хост TCP сервера: <input value="0.0.0.0" id="host">
+    </div>
+    <div>
+        Порт TCP сервера: <input value="6969" id="port">
+    </div>
+    <br>
+    <div>
+        Статус соединения <span id="status">OFF</span> <button id="connect">Подключиться</button>
+    </div>
+    <br>
+    <div>
+        Запрашивать первые n = <input type="number" min="0" id="simbols-quantity"> символов.
+        <button id="get-simbols">Запросить</button>
+    </div>
+    <br>
+    <div>
+        Ответ TCP сервера (первые n символов): <span id="resp"></span>
+    </div>
 
-        var client = new net.Socket();
-        client.connect(6969, '0.0.0.0', function () {
-            console.log('Connected');
-            client.write('Hello, server! Love, Client.');
-        });
-
-        client.on('data', function (data) {
-            console.log('Received: ' + data);
-            client.destroy(); // kill client after server's response
-        });
-
-        client.on('close', function () {
-            console.log('Connection closed');
-        });
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
