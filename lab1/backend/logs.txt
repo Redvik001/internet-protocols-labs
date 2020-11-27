@@ -1,0 +1,21 @@
+127.0.0.1:53942 - CONNECTED
+127.0.0.1:54454 - CONNECTED
+127.0.0.1:54454 - CLOSED
+127.0.0.1:54456 - CONNECTED
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - get first 25 simbols
+127.0.0.1:54456 - CLOSED
+127.0.0.1:54478 - CONNECTED
+127.0.0.1:54478 - get first 2500 simbols
+127.0.0.1:54478 - CLOSED
+127.0.0.1:54482 - CONNECTED
+127.0.0.1:54482 - get first 2500 simbols
+127.0.0.1:54482 - get first 250 simbols
+127.0.0.1:54482 - CLOSED
+127.0.0.1:54486 - CONNECTED
+127.0.0.1:54486 - get first 2500 simbols
+127.0.0.1:54486 - CLOSED

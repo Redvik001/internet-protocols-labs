@@ -7,14 +7,14 @@ require('electron-reload')(__dirname, {
 function createWindow() {
     const win = new BrowserWindow({
         width: 1200,
-        height: 500,
+        height: 300,
         webPreferences: {
             nodeIntegration: true
         }
     });
 
     win.loadFile('index.html');
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 }
 
 
