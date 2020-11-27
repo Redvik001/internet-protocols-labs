@@ -13,11 +13,11 @@ connectBtn.addEventListener("click", () => {
     if (client.readyState === "open") {
         client.destroy();
         statusElem.innerText = "OFF";
-        connectBtn.innerText = "Подключиться"
+        connectBtn.innerText = "Подключиться";
     } else {
         client.connect(portInput.value, hostInput.value, () => {
             statusElem.innerText = "ON";
-            connectBtn.innerText = "Разорвать соединение"
+            connectBtn.innerText = "Разорвать соединение";
         });
     }
 });
@@ -26,7 +26,6 @@ getSimbolsBtn.addEventListener("click", () => {
     if (client.readyState !== "open") return alert("В начале, подключитесь к серверу.");
     client.write(simbolsQuantityInput.value);
 });
-
 
 client.on('data', (data) => {
     respElem.innerText = data;

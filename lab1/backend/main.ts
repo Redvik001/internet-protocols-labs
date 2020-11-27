@@ -1,4 +1,5 @@
-import * as net from "net"
+import * as net from "net";
+import * as fs from "fs";
 import * as common from "./common";
 
 const HOST = '127.0.0.1';
@@ -11,17 +12,22 @@ remaining essentially unchanged. It was popularised in the 1960s with the releas
 Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
 
 net.createServer((sock) => {
-
-    console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
+    saveToLogs(`${sock.remoteAddress}:${sock.remotePort} - CONNECTED`);
 
     sock.on('data', (data) => {
         sock.write(text.substr(0, +data));
+        saveToLogs(`${sock.remoteAddress}:${sock.remotePort} - get first ${data} simbols`);
     });
 
     sock.on('close', () => {
-        console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
+        saveToLogs(`${sock.remoteAddress}:${sock.remotePort} - CLOSED`);
     });
 
 }).listen(PORT, HOST);
 
 console.log('Server listening on ' + HOST + ':' + PORT);
+
+function saveToLogs(text: string) {
+    console.log(text);
+    fs.appendFileSync("logs.txt", text + "\n");
+}
