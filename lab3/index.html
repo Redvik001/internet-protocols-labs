@@ -11,6 +11,8 @@
 
     Получатель: <input value="qwerty184219342008@gmail.com" id="recipient">
     <br>
+    Отправитель: test.28.11.2020@gmail.com
+    <hr>
     Заголовок: <input id="sended-title" value="Письмо 001">
     <br>
     Письмо: <textarea id="sended-text">
@@ -19,6 +21,11 @@
     <br>
     <button id="send-mail-btn">Отправить</button>
 
+    <hr>
+    <div id="messages-list">Список сообщений пуст</div>
+    <button id="update-messages-btn">Обновить список сообщений</button>
+    <hr>
+
     <script src="index.js"></script>
     <style>
         textarea {
@@ -26,6 +33,11 @@
             height: 200px;
             resize: none;
             width: 100%;
+        }
+
+        #messages-list div:hover {
+            cursor: pointer;
+            background-color: rgb(230, 230, 230);
         }
     </style>
 </body>
