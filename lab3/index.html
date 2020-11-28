@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab1 (TCP)</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+
+<body style="background: white;">
+
+    Получатель: <input value="qwerty184219342008@gmail.com" id="recipient">
+    <br>
+    Заголовок: <input id="sended-title" value="Письмо 001">
+    <br>
+    Письмо: <textarea id="sended-text">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </textarea>
+    <br>
+    <button id="send-mail-btn">Отправить</button>
+
+    <script src="index.js"></script>
+    <style>
+        textarea {
+            display: block;
+            height: 200px;
+            resize: none;
+            width: 100%;
+        }
+    </style>
+</body>
+
+</html>
