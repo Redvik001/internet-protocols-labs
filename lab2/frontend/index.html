@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lab1 (TCP)</title>
+    <title>Lab2 (FTP)</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 
@@ -12,24 +12,32 @@
         Хост FTP сервера: <input value="127.0.0.1" id="host">
     </div>
     <div>
-        Порт FTP сервера: <input value="6969" id="port">
+        Порт FTP сервера: <input value="6970" id="port">
+    </div>
+    <div>
+        Имя пользователя: <input value="Dmitrii" id="username">
+    </div>
+    <div>
+        Пароль: <input value="001" type="password" id="password">
     </div>
     <br>
-    <!-- <div>
+    <div>
         Статус соединения <span id="status">OFF</span> <button id="connect">Подключиться</button>
     </div>
-    <br>
-    <div>
-        Запрашивать первые n = <input type="number" min="0" id="simbols-quantity" value="25"> символов.
-        <button id="get-simbols">Запросить</button>
-    </div>
-    <br>
-    <div>
-        Ответ TCP сервера (первые n символов):
-        <pre id="resp"></pre>
-    </div> -->
+    <hr>
+    Файлы доступные для скачивания: <span id="shared-files-container"></span>
+    <hr>
+    Загрузить файл: <input type="file" id="upload-file-input">
 
     <script src="index.js"></script>
+    <style>
+        #shared-files-container a {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    </style>
 </body>
 
 </html>

@@ -1,56 +1,75 @@
 const hostInput = document.getElementById("host");
 const portInput = document.getElementById("port");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
 const statusElem = document.getElementById("status");
 const connectBtn = document.getElementById("connect");
-const simbolsQuantityInput = document.getElementById("simbols-quantity");
-const getSimbolsBtn = document.getElementById("get-simbols");
-const respElem = document.getElementById("resp");
+const sharedSilesContainer = document.getElementById("shared-files-container");
+const uploadFileInput = document.getElementById("upload-file-input");
 
-const ftp = require("basic-ftp")
+const ftp = require("basic-ftp");
+const { ipcRenderer } = require('electron');
 
 const client = new ftp.Client();
-client.ftp.verbose = true;
+// client.ftp.verbose = true;
 
-async function example() {
-    try {
-        await client.access({
-            host: "127.0.0.1",
-            port: 6970,
-            user: "Dmitrii",
-            password: "001"
-        })
-        console.log(await client.list())
-        // await client.uploadFrom("README.md", "README_FTP.md")
-        // await client.downloadTo("README_COPY.md", "README_FTP.md")
+connectBtn.addEventListener("click", async () => {
+    if (client.closed) {
+        try {
+            await login();
+        } catch (error) {
+            client.close();
+            return alert(error.message);
+        }
+        statusElem.innerText = "ON";
+        connectBtn.innerText = "Разорвать соединение";
+        updateSharedFilesList();
+    } else {
+        client.close();
+        statusElem.innerText = "OFF";
+        connectBtn.innerText = "Подключиться";
     }
-    catch (err) {
-        console.log("001", err);
+});
+
+
+uploadFileInput.addEventListener("change", async () => {
+    if (client.closed) {
+        uploadFileInput.value = null;
+        return alert("В начале, подключитесь к серверу.");
     }
-    // client.close();
+    const file = uploadFileInput.files[0];
+    if (!file) return;
+    await client.uploadFrom(file.path, file.name);
+    uploadFileInput.value = null;
+    alert(`Файл ${file.name} успешно загружен на ftp сервер.`);
+    updateSharedFilesList();
+});
+
+function login() {
+    return client.access({
+        host: hostInput.value,
+        port: portInput.value,
+        user: usernameInput.value,
+        password: passwordInput.value
+    });
 }
 
-example();
-
-
-
-// connectBtn.addEventListener("click", () => {
-//     if (client.readyState === "open") {
-//         client.destroy();
-//         statusElem.innerText = "OFF";
-//         connectBtn.innerText = "Подключиться";
-//     } else {
-//         client.connect(portInput.value, hostInput.value, () => {
-//             statusElem.innerText = "ON";
-//             connectBtn.innerText = "Разорвать соединение";
-//         });
-//     }
-// });
-
-// getSimbolsBtn.addEventListener("click", () => {
-//     if (client.readyState !== "open") return alert("В начале, подключитесь к серверу.");
-//     client.write(simbolsQuantityInput.value);
-// });
-
-// client.on('data', (data) => {
-//     respElem.innerText = data;
-// });
+async function updateSharedFilesList() {
+    sharedSilesContainer.innerHTML = "";
+    for (let file of await client.list()) {
+        if (file.isDirectory) return;
+        const anchor = document.createElement("a");
+        anchor.innerText = file.name;
+        anchor.addEventListener("click", async (event) => {
+            const onPathSended = async (event, data) => {
+                if (data.fileName === file.name) {
+                    ipcRenderer.off("sendDownloadFilePath", onPathSended);
+                    if (data.filePath) await client.downloadTo(data.filePath, file.name);
+                }
+            }
+            ipcRenderer.on("sendDownloadFilePath", onPathSended);
+            ipcRenderer.send("getDownloadFilePath", { fileName: file.name });
+        });
+        sharedSilesContainer.appendChild(anchor);
+    }
+}

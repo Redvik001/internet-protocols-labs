@@ -12,7 +12,7 @@ const ftpServer = new FtpSrv({
 ftpServer.on('login', (data, resolve, reject) => {
     if (data.username === "Dmitrii" && data.password === "001") {
         saveToLogs(`connection ${data.connection.id} - CONNECTED`);
-        resolve({});
+        resolve({ root: __dirname + "/files" });
     }
     else reject(new Error("invalid login or password"));
 });

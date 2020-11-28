@@ -19,10 +19,10 @@ module.exports = {
     watchOptions: {
         ignored: /node_modules/
     },
-    // node: {  // __dirname был равен "/" без этого
-    //     __filename: false,
-    //     __dirname: false
-    // },
+    node: {  // __dirname был равен "/" без этого
+        __filename: false,
+        __dirname: false
+    },
     target: 'node',
     externals: [nodeExternals()],
     module: {
